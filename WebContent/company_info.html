@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/xhtml1-loose.dtd">
+<html>
+<head>
+<!-- START META TAGS -->
+<meta name="author" content="Zetek Corporation" />
+<meta name="copyright" content="2008 Zetek Corporation (All Rights Reserved)" />
+<meta name="robots" content="noindex" />
+<meta name="robots" content="nofollow" />
+<meta name="robots" content="noodp" />
+<!-- END META TAGS -->
+<!-- START STYLESHEETS -->
+<link rel="stylesheet" type="text/css" href="../css/importer_admin.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/print.css" media="print" />
+<!-- END STYLESHEETS -->
+<!-- START JAVASCRIPT -->
+<script type="text/javascript" src="../javascript/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="../javascript/jquery.popupwindow.js"></script>
+<script type="text/javascript" src="../javascript/jquery.boxy.js"></script>
+<script type="text/javascript" src="../javascript/niftycube.js"></script>
+<script type="text/javascript" src="../javascript/utilityscripts.js"></script>
+<script type="text/javascript" src="../javascript/general_admin.js"></script>
+<script type="text/javascript">
+//LOOSE JS HERE 
+
+</script>
+<!-- END JAVASCRIPT -->
+<title>Wayfinding System Administration - Company Information</title>
+</head>
+<body id="way_adminBldgInfo" class="adminMode">
+<!-- TOOLTIP JAVASCRIPT MUST STAY HERE - DO NOT MOVE! -->
+<script type="text/javascript" src="../javascript/wz_tooltip.js"></script>
+<!-- TOOLTIP JAVASCRIPT MUST STAY HERE - DO NOT MOVE! -->
+<!-- START OUTER CONTAINER -->
+<div id="way_outerContainer">
+<!-- START MASTHEAD CONTAINER -->
+<script type="text/javascript" src="../javascript/include_masthead.js"></script>
+<!-- END MASTHEAD CONTAINER -->
+<!-- START CONTENT CONTAINER -->
+<div id="way_adminContentContainer" class="bgWhite">
+<!-- START ADMIN NAV CONTAINER -->
+<div id="way_adminNavContainer" class="pageColor">
+<ul id="way_adminMainMenu">
+<li><a href="building_info.html">Building Information</a></li>
+<li><a href="location_info.html">Location Information</a></li>
+<li><a href="personnel_info.html">Personnel Information</a></li>
+<li><a href="javascript:void(0)" class="current">Company Information</a></li>
+<li><a href="reporting.html">Reports</a></li>
+<li><a href="updates.html">System Updates</a></li>
+<li><a href="bulk_uploads.html">Bulk Upload</a></li>
+</ul>
+</div>
+<!-- END ADMIN NAV CONTAINER -->
+<!-- START ADMIN SUB NAV CONTAINER -->
+<div id="way_adminSubNavContainer" class="bgWhite">
+<!-- START ADMIN SEARCH CONTAINER -->
+<div id="way_adminSearchContainer" class="bgWhite alignCenter width75">
+<!-- START BLDG SEARCH FORM  -->
+<form name="admin_companySrchForm" id="admin_companySrchForm">
+
+<div class="alignLeft">
+<h4 class="floatLeft">Company Search</h4><div class="floatLeft"><img src="../images/icon_help.png" width="16" height="16" class="marginL4px cursorHand" onmouseover="Tip(tip_companySearch)" onmouseout="UnTip()" /></div>
+<p class="floatRight">
+<a href="javascript:void(0)" class="srchOptsLink">Search Options</a>
+<a href="javascript:void(0)" class="hideSrchOptsLink" style="display:none;">Hide Options</a>
+</p>
+<div class="clearFloat"></div>
+</div>
+<!-- START BLDG SEARCH FIELD NO OPTIONS  -->
+<div class="admin_srchNoOptsBox"><input type="text" name="admin_companyNoOptsSrchFld" id="admin_companyNoOptsSrchFld" class="width99" /></div>
+<!-- END BLDG SEARCH FIELD NO OPTIONS  -->
+<!-- START BLDG SEARCH FIELD WITH OPTIONS  -->
+<div class="admin_srchWithOptsBox" style="display:none;">
+<input type="text" name="admin_companyOptsSrchFld" id="admin_companyOptsSrchFld" class="width78" />
+<select id="admin_companySrchOptsMenu" name="admin_companySrchOptsMenu" class="width20">
+<option selected>Find Company By...</option>
+<option value="">1</option>
+<option value="">2</option>
+<option value="">3</option>
+</select>
+</div>
+<!-- END BLDG SEARCH FIELD WITH OPTIONS  -->
+<!-- START BLDG SEARCH FIELD BUTTONS  -->
+<button type="reset" id="admin_srchClearBtn" name="admin_srchClearBtn" class="btnRed cursorHand">Clear</button>
+<button type="submit" id="admin_srchFindBtn" name="admin_srchFindBtn" class="btnBlue cursorHand">Find</button>
+<!-- END BLDG SEARCH FIELD BUTTONS  -->
+</form>
+<!-- END BLDG SEARCH FORM -->
+</div>
+<!-- END ADMIN SEARCH CONTAINER -->
+
+<!-- START CURRENT BLDG/LOCATION NAME  -->
+<fieldset id="currentBLDGInfo">
+<legend class="green">Current Building <img src="../images/icon_information.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_currentBldg)" onmouseout="UnTip()" /></legend>
+<h1>Building Name</h1>
+</fieldset>
+<!-- END CURRENT BLDG/LOCATION NAME  -->
+
+<!-- START BLDG INFO SUB NAV MENU -->
+<ul id="way_adminSubMenu">
+<li><a href="javascript:void(0)" class="current">General</a></li>
+</ul>
+<!-- END BLDG INFO SUB NAV MENU -->
+</div>
+<!-- END ADMIN SUB NAV CONTAINER -->
+<!-- START ADMIN FORMS CONTAINER -->
+<div id="way_adminFormsContainer" class="bgWhite">
+<!-- START FORM SUBMISSION MESSAGE BOXES -->
+<!-- START ERROR MSG BOX -->
+<div id="formMsgBoxError" class="formError padding8px" style="display:visible">
+<div class="floatLeft marginR5px"><img src="../images/icon_alert.png" width="16" height="16" alt="" /></div><div class="floatLeft boldText">The following required fields have errors or have not filled in. Please correct the problems and re-submit the form.</div>
+<br class="clearFloat"/>
+<ul>
+<li><strong>field name 1</strong></li>
+<li><strong>field name 2</strong></li>
+</ul>
+</div>
+<!-- END ERROR MSG BOX -->
+<!-- START SUCCESS MSG BOX -->
+<div id="formMsgBoxSuccess" class="formSuccess padding8px" style="display:visible">
+<div class="floatLeft marginR5px"><img src="../images/icon_finished.png" width="16" height="16" alt="" /></div><div class="floatLeft boldText">The information has been successfully submitted.</div>
+<br class="clearFloat"/>
+</div>
+<!-- ENDSUCCESS MSG BOX -->
+<!-- END FORM SUBMISSION MESSAGE BOXES -->
+<!-- START GENERAL COMPANY INFO FORM CONTAINER -->
+<div id="companyGeneralInfoContent">
+<!-- START GENERAL COMPANY INFO FORM -->
+<form id="companyGeneralInfoForm" name="companyGeneralInfoForm">
+<!-- START PERSONNAL DEFAULT INFO FEILD SET -->
+<fieldset id="companyGeneralInfo">
+<legend>Default Company Information <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_companyDefaultInfo)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width18">Current Logo:</label><div class="floatLeft"><img src="../images/thumbnail.png" class="borderGrey marginB5px" width="100" height="100" /></div><div class="floatLeft marginL2px marginT4px">
+<img src="../images/icon_add.png" width="16" height="16" class="floatLeft" />
+<p class="floatLeft marginL2px"><a href="#addLogoWizard" class="modalPopup" title="Upload/Change Logo">Upload/Change Logo</a></p>
+<br class="clearFloat" />
+</div>
+<br class="clearFloat" />
+<label class="floatLeft width18">Name:</label><input type="text" id="companyName" name="companyName" class="floatLeft width25 marginB5px" />
+<br class="clearFloat" />
+<label class="floatLeft width18">Division/Dept:</label><input type="text" id="companyDivision" name="companyDivision" class="floatLeft width25 marginB5px" />
+<br class="clearFloat" />
+<label class="floatLeft width18">Phone:</label><input type="text" id="companyPhoneNumber" name="companyPhoneNumber" class="floatLeft width25 marginB5px" />
+<br class="clearFloat" />
+<label class="floatLeft width18">Fax:</label><input type="text" id="companyFaxNumber" name="companyFaxNumber" class="floatLeft width25 marginB5px" />
+<br class="clearFloat" />
+<label class="floatLeft width18">Email:</label><input type="text" id="companyEmailAddress" name="companyEmailAddress" class="floatLeft width25 marginB5px" />
+<br class="clearFloat" />
+<label class="floatLeft width18">Details:</label><textarea name="companyDetails" id="companyDetails" class="width25 marginB5px"></textarea>
+<br class="clearFloat" />
+<label class="floatLeft width18">Tags:</label><input type="text" id="companyTags" name="companyTags" class="floatLeft width25 marginB5px" />
+<br class="clearFloat" />
+</fieldset>
+<!-- END PERSONNAL DEFAULT INFO FEILD SET -->
+<!-- START ADDITIONAL INFO FEILD SET -->
+<fieldset id="companyAdditionalInfo">
+<legend>Additional Company Information (Optional) <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_companyAdditionalInfo)" onmouseout="UnTip()" /></legend>
+<div class="floatRight">
+<img src="../images/icon_add.png" width="16" height="16" class=" floatLeft marginL5px" /></a>
+<p class="floatLeft marginL2px"><a href="#addCustomFieldsWizard" class="modalPopup" title="Add Custom Field">Add Custom Field</a></p>
+<br class="clearFloat" />
+</div>
+<br class="clearFloat" />
+<p class="txtGrey"><em>No custom fields have been created.</em></p>
+</fieldset>
+<!-- END ADDITIONAL INFO FEILD SET -->
+<!-- START BUTTON CONTAINER -->
+<div id="formBtnContainer" class="alignCenter marginTB5px">
+<!-- START BUTTON CONTAINER -->
+<div id="formBtnContainer" class="alignCenter marginTB5px">
+<button type="submit" id="clearBtn" name="clearBtn" class="btnRed cursorHand">Clear</button>
+<button type="submit" id="addBtn" name="addBtn" class="btnBlue cursorHand">Add</button>
+<button type="reset" id="deleteBtn" name="deleteBtn" class="btnRed cursorHand">Delete</button>
+<button type="submit" id="updateBtn" name="updateBtn" class="btnBlue cursorHand">Update</button>
+<div>
+<!-- END BUTTON CONTAINER -->
+<div>
+<!-- END BUTTON CONTAINER -->
+</form>
+<!-- END GENERAL PERSONNAL INFO FORM -->
+<!-- START HIDDEN MODAL POPUP CONTENT -->
+<!-- START ADD LOGO WIZARD -->
+<div id="addLogoWizard" style="display:none;" class="width500px alignLeft">
+<form id="addLogoForm" name="addLogoForm">
+<fieldset id="addPhotoField" >
+<legend>Upload Company Logo <img src="../images/icon_help.png" width="16" height="16" /></legend>
+<label class="floatLeft width25">Logo Image File:</label><input type="file" id="companyLogoSrc" name="companyLogoSrc" size="30" class="marginB5px" />
+<br class="clearFloat" />
+</fieldset>
+<div class="alignCenter marginTB5px">
+<button type="reset" id="addPhotoCancelBtn" name="addCompanyCancelBtn" class="btnRed cursorHand">Cancel</button>
+<button type="submit" id="addPhotoSubmitBtn" name="addCompanySubmitBtn" class="btnBlue cursorHand">Upload</button>
+</div>
+</form>
+</div>
+<!-- END ADD LOGO WIZARD -->
+
+<!-- START ADD CUSTOM FIELD WIZARD -->
+<div id="addCustomFieldsWizard" style="display:none;" class="width500px alignLeft">
+<form id="addcustomFieldForm" name="addcustomFieldForm">
+<!-- START FIELD TYPE SELECT -->
+<fieldset id="customFieldType">
+<legend>Custom Field Type <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width25">Field Type:</label><select id="addFieldType" name="addFieldType" class="width50" onchange="custFieldSelect();">
+<option selected />Select A Field Type</option>
+<option value="customInputBox" >Input Box</option>
+<option value="customCheckBox" />Check Box</option>
+<option value="customRadioBtn" />Radio Buttons</option>
+<option value="customTextArea" />Text Area</option>
+<option value="customSelectBox" />Select Box</option>
+</select>
+<br class="clearFloat" />
+</fieldset>
+<!-- END FIELD TYPE SELECT -->
+<!-- START ADD INPUT FIELDS -->
+<fieldset id="addInputBoxField" style="display:none;">
+<legend>Custom Input Field <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width25">Label Name:</label><input type="text" id="addInputBoxLabelName" name="addInputBoxLabelName" class="floatLeft marginB5px width50" />
+<label class="floatLeft width25">Field Name:</label><input type="text" id="addInputBoxFieldName" name="addInputBoxFieldName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Required Field?:</label>
+<div class="floatLeft width50">
+<input type="radio" name="addInputBoxRequired" id="addInputBoxRequired" value="No" class="floatLeft marginB5px marginR5px checkBox" checked /><label class="floatLeft chkBoxRadio">No</label>
+<input type="radio" name="addInputBoxRequired" id="addInputBoxRequired" value="Yes" class="floatLeft marginB5px marginL5px marginR5px checkBox" /><label class="floatLeft chkBoxRadio">Yes</label>
+</div>
+<br class="clearFloat" />
+</fieldset>
+<!-- END ADD INPUT FIELDS -->
+<!-- START ADD CHECKBOX FIELDS -->
+<div id="addCheckBoxField" style="display:none;" class="height250px scrollAuto">
+<fieldset>
+<legend>Custom Checkboxes <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width25">Label Name:</label><input type="text" id="addInputBoxLabelName" name="addInputBoxLabelName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Required Field?:</label>
+<div class="floatLeft width50">
+<input type="radio" name="addCheckBoxRequired" id="addCheckBoxRequired" value="No" class="floatLeft marginB5px marginR5px checkBox" checked  /><label class="floatLeft chkBoxRadio">No</label>
+<input type="radio" name="addCheckBoxRequired" id="addCheckBoxRequired" value="Yes" class="floatLeft marginB5px marginL5px marginR5px checkBox" /><label class="floatLeft chkBoxRadio">Yes</label>
+</div>
+<br class="clearFloat" />
+<div class="padding8px">
+<img src="../images/icon_add.png" width="16" height="16" class="floatLeft marginL5px" /></a>
+<p class="floatLeft marginL2px"><a href="javascript:void(0)" title="Click To Add A Checkbox">Add A Checkbox</a></p>
+<br class="clearFloat" />
+</div>
+<!-- START CHECKBOX OPTIONS FIELDS -->
+<fieldset>
+<legend>Check Box #1 <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width24">Name:</label><input type="text" id="addInputCheckBox1Name" name="addInputCheckBox1Name" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width24">Value:</label><input type="text" id="addInputCheckBox1Value" name="addInputCheckBox1Value" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+</fieldset>
+<fieldset>
+<legend>Check Box #2 <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width24">Name:</label><input type="text" id="addInputCheckBox2Name" name="addInputCheckBox2Name" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width24">Value:</label><input type="text" id="addInputCheckBox2Value" name="addInputCheckBox2Value" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+</fieldset>
+<!-- END CHECKBOX OPTIONS FIELDS-->
+</fieldset>
+</div>
+<!-- END ADD CHECKBOXES FIELD-->
+<!-- START ADD SELECT FIELD -->
+<div id="addSelectMenuField" style="display:none;" class="height250px scrollAuto">
+<fieldset>
+<legend>Custom Select Menu <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width25">Label Name:</label><input type="text" id="addSelectMenuLabelName" name="addSelectMenuLabelName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Field Name:</label><input type="text" id="addSelectMenuFieldName" name="addSelectMenuFieldName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Required Field?:</label>
+<div class="floatLeft width50">
+<input type="radio" name="addSelectMenuRequired" id="addSelectMenuRequired" value="No" class="floatLeft marginB5px marginR5px checkBox" checked  /><label class="floatLeft chkBoxRadio">No</label>
+<input type="radio" name="addSelectMenuRequired" id="addSelectMenuRequired" value="Yes" class="floatLeft marginB5px marginL5px marginR5px checkBox" /><label class="floatLeft chkBoxRadio">Yes</label>
+</div>
+<br class="clearFloat" />
+<div class="padding8px">
+<img src="../images/icon_add.png" width="16" height="16" class="floatLeft marginL5px" /></a>
+<p class="floatLeft marginL2px"><a href="javascript:void(0)" title="Click To Add A Menu Option">Add A Menu Option</a></p>
+<br class="clearFloat" />
+</div>
+<!-- START MENU OPTION FIELDS -->
+<fieldset>
+<legend>Menu Option #1 <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width24">Name:</label><input type="text" id="addSelectMenuOpt1Name" name="addSelectMenuOpt1Name" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width24">Value:</label><input type="text" id="addSelectMenuOpt1Value" name="addSelectMenuOpt1Value" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+</fieldset>
+<fieldset>
+<legend>Menu Option #2 <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width24">Name:</label><input type="text" id="addSelectMenuOpt2Name" name="addSelectMenuOpt2Name" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width24">Value:</label><input type="text" id="addSelectMenuOpt2Value" name="addSelectMenuOpt2Value" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+</fieldset>
+<!-- END MENU OPTION FIELDS -->
+</fieldset>
+</div>
+<!-- END ADD SELECT FIELD -->
+<!-- START ADD RADIO BTNS FIELDS -->
+<div id="addRadioBtnField" style="display:none;" class="height250px scrollAuto">
+<fieldset>
+<legend>Custom Radio Buttons <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width25">Label Name:</label><input type="text" id="addRadioBtnLabelName" name="addRadioBtnLabelName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Field Name:</label><input type="text" id="addRadioBtnLabelName" name="addRadioBtnLabelName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Required Field?:</label>
+<div class="floatLeft width50">
+<input type="radio" name="addRadioBtnRequired" id="addRadioBtnRequired" value="No" class="floatLeft marginB5px marginR5px checkBox" checked  /><label class="floatLeft chkBoxRadio">No</label>
+<input type="radio" name="addRadioBtnRequired" id="addRadioBtnRequired" value="Yes" class="floatLeft marginB5px marginL5px marginR5px checkBox" /><label class="floatLeft chkBoxRadio">Yes</label>
+</div>
+<br class="clearFloat" />
+<div class="padding8px">
+<img src="../images/icon_add.png" width="16" height="16" class="floatLeft marginL5px" /></a>
+<p class="floatLeft marginL2px"><a href="javascript:void(0)" title="Click To Add A Radio Button">Add A Radio Button</a> <span class="fontSize07Em">(2 radio buttons minimum)<span></p>
+<br class="clearFloat" />
+</div>
+<!-- START RADIO BTN OPTIONS FIELDS -->
+<fieldset>
+<legend>Radio Button #1 <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width24">Button Label:</label><input type="text" id="addRadioBtn1Name" name="addRadioBtn1Name" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width24">Value:</label><input type="text" id="addRadioBtn1Value" name="addRadioBtn1Value" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+</fieldset>
+<fieldset>
+<legend>Radio Button #2 <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width24">Button Label:</label><input type="text" id="addRadioBtn2Name" name="addRadioBtn2Name" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width24">Value:</label><input type="text" id="addRadioBtn2Value" name="addRadioBtn2Value" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+</fieldset>
+<!-- END RADIO BTN OPTIONS FIELDS-->
+</fieldset>
+</div>
+<!-- END ADD RADIO BTNS FIELD-->
+<!-- START ADD TEXT AREA FIELDS -->
+<fieldset id="addTextAreaField" style="display:none;">
+<legend>Custom Text Area <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_addCustomField)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft width25">Label Name:</label><input type="text" id="addTextAreaLabelName" name="addTextAreaLabelName" class="floatLeft marginB5px width50" />
+<label class="floatLeft width25">Field Name:</label><input type="text" id="addTextAreaFieldName" name="addTextAreaFieldName" class="floatLeft marginB5px width50" />
+<br class="clearFloat" />
+<label class="floatLeft width25">Required Field?:</label>
+<div class="floatLeft width50">
+<input type="radio" name="addTextAreaRequired" id="addTextAreaRequired" value="No" class="floatLeft marginB5px marginR5px checkBox" checked /><label class="floatLeft chkBoxRadio">No</label>
+<input type="radio" name="addITextAreaRequired" id="addTextAreaxRequired" value="Yes" class="floatLeft marginB5px marginL5px marginR5px checkBox" /><label class="floatLeft chkBoxRadio">Yes</label>
+</div>
+<br class="clearFloat" />
+</fieldset>
+<!-- END ADD TEXT AREA FIELDS -->
+<!-- START ADD FIELD WIZARD MODAL POUP BTNS -->
+<div class="alignCenter marginTB5px">
+<button type="reset" id="custFieldCancelBtn" name="custFieldCancelBtn" class="btnRed cursorHand">Cancel</button>
+<button type="submit" id="custFieldSubmitBtn" name="custFieldSubmitBtn" class="btnBlue cursorHand">Add Field</button>
+</div>
+<!-- END ADD FIELD WIZARD MODAL POUP BTNS -->
+</div>
+<!-- END ADD CUSTOM FIELD WIZARD -->
+<!-- END HIDDEN MODAL POPUP CONTENT -->
+</div>
+<!-- END GENERAL PERSONNAL INFO FORM CONTAINER -->
+
+</div>
+<!-- END ADMIN FORMS CONTAINER -->
+<!-- START ADMIN FOOTER CONTAINER -->
+<div id="way_adminFooterContainer" class="bgWhite">
+<p>Copyright &copy; 2008 Zetek Corporation (All Rights Reserved)</p>
+</div>
+<!-- START ADMIN FOOTER CONTAINER -->
+</div>
+<!-- END CONTENT CONTAINER -->
+
+</div>
+<!-- END OUTER CONTAINER -->
+</body>
+</html>
+<!-- EOF -->

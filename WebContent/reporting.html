@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/xhtml1-loose.dtd">
+<html>
+<head>
+<!-- START META TAGS -->
+<meta name="author" content="Zetek Corporation" />
+<meta name="copyright" content="2008 Zetek Corporation (All Rights Reserved)" />
+<meta name="robots" content="noindex" />
+<meta name="robots" content="nofollow" />
+<meta name="robots" content="noodp" />
+<!-- END META TAGS -->
+<!-- START STYLESHEETS -->
+<link rel="stylesheet" type="text/css" href="../css/importer_admin.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/print.css" media="print" />
+<!-- END STYLESHEETS -->
+<!-- START JAVASCRIPT -->
+<script type="text/javascript" src="../javascript/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="../javascript/jquery.popupwindow.js"></script>
+<script type="text/javascript" src="../javascript/jquery.boxy.js"></script>
+<script type="text/javascript" src="../javascript/niftycube.js"></script>
+<script type="text/javascript" src="../javascript/utilityscripts.js"></script>
+<script type="text/javascript" src="../javascript/general_admin.js"></script>
+<script type="text/javascript">
+//LOOSE JS HERE
+
+</script>
+<!-- END JAVASCRIPT -->
+<title>Wayfinding System Administration - Reporting</title>
+</head>
+<body id="way_adminBldgInfo" class="adminMode">
+<!-- TOOLTIP JAVASCRIPT MUST STAY HERE - DO NOT MOVE! -->
+<script type="text/javascript" src="../javascript/wz_tooltip.js"></script>
+<!-- TOOLTIP JAVASCRIPT MUST STAY HERE - DO NOT MOVE! -->
+<!-- START OUTER CONTAINER -->
+<div id="way_outerContainer">
+<!-- START MASTHEAD CONTAINER -->
+<script type="text/javascript" src="../javascript/include_masthead.js"></script>
+<!-- END MASTHEAD CONTAINER -->
+
+<!-- START CONTENT CONTAINER -->
+<div id="way_adminContentContainer" class="bgWhite">
+<!-- START ADMIN NAV CONTAINER -->
+<div id="way_adminNavContainer" class="pageColor">
+<ul id="way_adminMainMenu">
+<li><a href="building_info.html">Building Information</a></li>
+<li><a href="location_info.html">Location Information</a></li>
+<li><a href="personnel_info">Personnel Information</a></li>
+<li><a href="company_info.html">Company Information</a></li>
+<li><a href="javascript:void(0)" class="current">Reports</a></li>
+<li><a href="updates.html">System Updates</a></li>
+<li><a href="bulk_uploads.html">Bulk Upload</a></li>
+</ul>
+</div>
+<!-- END ADMIN NAV CONTAINER -->
+<!-- START ADMIN SUB NAV CONTAINER -->
+<div id="way_adminSubNavContainer" class="bgWhite">
+
+<!-- START CURRENT BLDG/LOCATION NAME  -->
+<fieldset id="currentBLDGInfo">
+<legend class="green">Current Building <img src="../images/icon_information.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_currentBldg)" onmouseout="UnTip()" /></legend>
+<h1>Building Name</h1>
+</fieldset>
+<!-- END CURRENT BLDG/LOCATION NAME  -->
+
+<!-- START BLDG INFO SUB NAV MENU -->
+<ul id="way_adminSubMenu">
+<li><a href="javascript:void(0)" class="current">General</a></li>
+</ul>
+<!-- END BLDG INFO SUB NAV MENU -->
+</div>
+<!-- END ADMIN SUB NAV CONTAINER -->
+<!-- START ADMIN FORMS CONTAINER -->
+<div id="way_adminFormsContainer" class="bgWhite">
+<!-- START FORM SUBMISSION MESSAGE BOX -->
+<div id="formMsgBox" class="formSuccess" style="display:none"><p><img src="../images/icon_finished.png" width="16" height="16" alt="" /> <img src="../images/icon_alert.png" width="16" height="16" alt="" /> Message...</p></div>
+<!-- END FORM SUBMISSION MESSAGE BOX -->
+<!-- START REPORTS TAB CONTENT -->
+<div id="generateReportContent" style="display:visible;">
+<!-- START GENERATE REPORTS FORM -->
+<form id="generateReportForm" name="generateReportForm">
+<!-- START START DATE SELECT FIELDSET -->
+<fieldset id="sofwareUpdatesFields" class="width47 floatLeft">
+<legend>Start Date <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_startDate)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft">Select A Start Date:</label>
+<select id="startSelectMonth" class="floatLeft">
+<option value="All">Month</option>
+</select>
+<select id="startSelectDay" class="floatLeft">
+<option value="All">Day</option>
+</select>
+<select id="startSelectYear" class="floatLeft">
+<option value="All">Year</option>
+</select>
+<!-- <div class="floatLeft marginL5px paddingT2px"><img src="../images/icon_calendar.png" width="16" height="16" class="cursorHand" /></div>-->
+<br class="clearFloat" />
+</fieldset>
+<!-- END START DATE SELECT FIELDSET -->
+<!-- START END DATE SELECT  FIELDSET -->
+<fieldset id="cadUpdatesFields" class="width47 floatRight">
+<legend>End Date <img src="../images/icon_help.png" width="16" height="16" class="cursorHand" onmouseover="Tip(tip_endDate)" onmouseout="UnTip()" /></legend>
+<label class="floatLeft">Select An End Date:</label>
+<select id="endSelectMonth" class="floatLeft">
+<option value="All">Month</option>
+</select>
+<select id="endSelectDay" class="floatLeft">
+<option value="All">Day</option>
+</select>
+<select id="endSelectYear" class="floatLeft">
+<option value="All">Year</option>
+</select>
+<!--  <div class="floatLeft marginL5px paddingT2px"><img src="../images/icon_calendar.png" width="16" height="16" class="cursorHand" /></div>-->
+<br class="clearFloat" />
+</fieldset>
+<!-- END END DATE SELECT FIELDSET -->
+<div class="clearFloat"></div>
+
+<!-- START GENERATE REPORTS BUTTON -->
+<div class="alignCenter marginTB5px">
+<button type="submit" id="clearReportBtn" name="clearReportBtn" class="btnRed cursorHand">Clear</button>
+<button type="submit" id="generateReportBtn" name="generateReportBtn" class="btnBlue cursorHand">Generate Report</button>
+</div>
+<!-- START GENERATE REPORTS BUTTON -->
+</form>
+<!-- END GENERATE REPORTS FORM -->
+<!-- START REPORTS RESULTS FIELD -->
+<fieldset id="reportResuts">
+<legend>Report Results
+<img src="../images/icon_help.png" width="16" height="16"
+class="cursorHand" onmouseover="Tip(tip_reportResults)"
+onmouseout="UnTip()" /></legend>
+<!--  START REPORT INFO DIV -->
+<div id="reportInfo">
+<h3 id="reporTitle" class="floatLeft">Wayfinding System Report:
+<span class="dateRange"><span id="report_start">00/00/0000</span>
+<strong> to </strong><span id="report_end">00/00/0000</span></span></h3>
+<!-- START REPORT DOWNLOAD LINK -->
+<div class="floatRight" style="display:visible;">
+<a href="javaScript:void(0)">
+<img src="../images/icon_report.png" width="16" height="16"
+class="cursorHand floatLeft" title="Download Report" /></a>
+<p class="floatLeft marginL2px paddingT2px">
+<a href="javaScript:void(0)" title="Download Report">Download Report</a></p>
+<br class="clearFloat" />
+</div>
+<!-- END REPORT DOWNLOAD LINK -->
+<br class="clearFloat" />
+</div>
+<!--  END REPORT INFO DIV -->
+<!--  START REPORT DATA DIV -->
+<div id="report_content" class="marginT5px">
+<!-- START REPORT TABLE  -->
+<table id="" class="reportsTable">
+<tr>
+<th>Date/Time</th>
+<th>Route Type</th>
+<th>From</th>
+<th>To</th>
+<th>Alarm Type</th>
+<th>Alarm ID</th>
+</tr>
+<tr>
+<td>00/00/000 | 12:00 AM</td>
+<td>Alarm</td>
+<td>Stage Door</td>
+<td>Wig Room</td>
+<td>Smoke</td>
+<td>N00LD003456788</td>
+</tr>
+<tr class="altrow">
+<td>00/00/000 | 12:00 AM</td>
+<td>Non-Alarm</td>
+<td>Stage Door</td>
+<td>Wig Room</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>00/00/000 | 12:00 AM</td>
+<td>Alarm</td>
+<td>Stage Door</td>
+<td>Wig Room</td>
+<td>Smoke</td>
+<td>N00LD003456788</td>
+</tr>
+</table>
+<!-- END REPORT TABLE  -->
+</div>
+<!--  END REPORT DATA DIV -->
+</fieldset>
+<!-- END REPORTS RESULTS FIELD -->
+</div>
+<!-- END REPORTS TAB CONTENT -->
+
+</div>
+<!-- END ADMIN FORMS CONTAINER -->
+<!-- START ADMIN FOOTER CONTAINER -->
+<div id="way_adminFooterContainer" class="bgWhite">
+<p>Copyright &copy; 2008 Zetek Corporation (All Rights Reserved)</p>
+</div>
+<!-- START ADMIN FOOTER CONTAINER -->
+</div>
+<!-- END CONTENT CONTAINER -->
+
+</div>
+<!-- END OUTER CONTAINER -->
+</body>
+</html>
+<!-- EOF -->

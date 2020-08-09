@@ -1,0 +1,208 @@
+/* @name ShapeSerializer.java
+
+   Copyright (c) 2002-2008 Zetek Corporation (All Rights Reserved)
+
+-------- Licensed Software Proprietary Information Notice -------------
+
+This software is a working embodiment of certain trade secrets of
+Zetek Corporation.  The software is licensed only for the
+day-to-day business use of the licensee.  Use of this software for
+reverse engineering, decompilation, use as a guide for the design of a
+competitive product, or any other use not for day-to-day business use
+is strictly prohibited.
+
+All screens and their formats, color combinations, layouts, and
+organization are proprietary to and copyrighted by Zetek Corporation.
+
+All rights are reserved.
+
+Authorized Zetek customer use of this software is subject to the
+terms and conditions of the software license executed between Customer
+and Zetek Corporation.
+
+------------------------------------------------------------------------
+
+*/
+
+package zetek.graphserve;
+
+import java.awt.Shape;
+import java.awt.geom.Path2D;
+import java.awt.geom.PathIterator;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+
+/**
+ * Utilities to serialize shapes into sequential strings and to
+ * synthesize shapes from strings.
+
+ * @author Bill Taylor
+ * @version %I%, %G%
+ * @since
+ *
+ * @see zetek.graphserve.Frobnicator
+ */
+
+public class ShapeSerializer {
+
+  public static final long serialVersionUID = 1;
+
+  /** Obligatory constructor.*/
+  public ShapeSerializer() { /* */ }
+
+  public static NumberFormat dF = NumberFormat.getNumberInstance();
+  static {
+    dF.setMaximumFractionDigits(5);
+    dF.setMinimumFractionDigits(1); // force a decimal point to get double
+    dF.setGroupingUsed(false);  // no commas in the numbers, please
+  }
+
+  /**
+   * Append numbers from the array to the string buffer.  The caller
+   * has appended a character indicating how many numbers will follow.
+   * @param many how many numbers to append
+   * @param sb string buffer
+   * @param coords array of numbers to be formatted for appending
+   */
+  public static void apNumbers(int many, StringBuilder sb, double[] coords) {
+    sb.append(dF.format(coords[0]));
+    for (int i=1; i<many; i++) {
+      sb.append(" " + dF.format(coords[i]));
+    }
+  }
+
+  /**
+   * Convert a shape to a string by asking a path iterator to emit
+   * path segments.  The string is crafted for parsing by
+   * <code>synthesizeShape</code>.
+   * @param shape input shape
+   * @return string which represents the shape.  The character before
+   * the first number of a segment indicates what to do with the
+   * following numbers.  It is expected that there should be only one
+   * move to in a shape.
+   */
+  public static String serializeShape(Shape shape) {
+    if (shape == null) { return ""; }
+    double[] segCoords = new double[6];
+    int flag = -1;
+    PathIterator pIt = shape.getPathIterator(null);
+    StringBuilder sb = new StringBuilder(50);
+
+    while (!pIt.isDone()) {
+      flag   = pIt.currentSegment(segCoords);
+
+      /* SVG shape notation is defined in
+       * http://www.w3.org/TR/SVG/paths.html, scroll down to PathData.
+
+       * SVG uses upper case for absolute coordinates and lower case
+       * for relative coordinates.  This method generates only
+       * absolute coordinates so it uses upper case exclusively.  It
+       * is not clear at this point just how the Java cubic and
+       * quadratic shape elements should be converted to SVG notation.
+       * Shape frobnication produces only L and M segments, however,
+       * so this issue is moot for the moment. */
+      switch (flag) {
+      case PathIterator.SEG_CLOSE:
+	//sb.append(Z");
+	break;
+      case PathIterator.SEG_MOVETO:
+	sb.append("M" + dF.format(segCoords[0])+" "+dF.format(segCoords[1]));
+	break;
+      case PathIterator.SEG_LINETO:
+	//if (sb.length() > 0) { sb.append(" "); }
+	sb.append("L" + dF.format(segCoords[0])+" "+dF.format(segCoords[1]));
+	break;
+      case PathIterator.SEG_CUBICTO:
+	sb.append("C");
+	apNumbers(6, sb, segCoords);
+	break;
+      case PathIterator.SEG_QUADTO:
+	sb.append("Q");
+	apNumbers(4, sb, segCoords);
+	break;
+
+      default:
+	System.out.println("Unexpected segment type " + flag);
+        break;
+      }
+      pIt.next();
+    }
+    return sb.toString();
+  }
+
+  /**
+   * Parse and store a specified number of numbers from the input
+   * string.
+   * @param many now many numbers to parse
+   * @param pp indicates the current parse position
+   * @param sh input string
+   * @param segCoords array of numbers for the output
+   */
+  public static void narf(int many, ParsePosition pp, String sh,
+			  double[] segCoords) {
+    for (int i=0; i<many; i++) {
+      pp.setIndex(pp.getIndex()+1);
+      segCoords[i] = dF.parse(sh, pp).doubleValue();
+    }
+  }
+
+  /**
+   * Turn a string back into a shape by following the path points
+   * produced by the iterator in <code>serializeShape</code>.
+   * @param sh input string generated by serializeShape
+   * @return string converted to a shape
+   */
+  public static Shape syntehsizeShape(String sh) {
+    if ((sh == null) || (sh.length() <=0)) { return null; }
+    double segCoords[] = new double[6];
+    // System.out.println(sh.length());
+    ParsePosition pp = new ParsePosition(0);
+    Path2D path = new Path2D.Double();
+    int len = sh.length();
+    char ch;
+
+    narf(2,pp,sh,segCoords);
+
+    path.moveTo(segCoords[0], segCoords[1]);
+
+    // The parse position eventually exceeds the length of the line.
+    while (pp.getIndex() < len) {
+      ch = sh.charAt(pp.getIndex());
+
+      /* SVG shape notation uses capital letters for absolute
+       * coordinates and lower case for relative coordinates.  This
+       * utility uses only aboslute coordinates so both letters are
+       * treated in the same way.*/
+      switch(ch) {
+      case 'M':
+      case 'm':
+	narf(2,pp,sh,segCoords);
+        path.moveTo(segCoords[0], segCoords[1]);
+	break;
+      case 'L':
+      case 'l':
+	narf(2,pp,sh,segCoords);
+        path.lineTo(segCoords[0], segCoords[1]);
+	break;
+      case 'C':
+      case 'c':
+	narf(6,pp,sh,segCoords);
+        path.curveTo(segCoords[0], segCoords[1], segCoords[2], segCoords[3],
+		     segCoords[4], segCoords[5]);
+	break;
+      case 'Q':
+      case 'q':
+	narf(4,pp,sh,segCoords);
+        path.quadTo(segCoords[0], segCoords[1], segCoords[2], segCoords[3]);
+	break;
+
+	default:
+	  System.out.println("Bad segment char >" + ch + "<");
+	break;
+      }
+    }
+    path.closePath();
+
+    return path;
+  }
+}
